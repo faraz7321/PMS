@@ -5,11 +5,15 @@
  */
 package pms;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Faraz Ahmad
  */
 public class ALogin extends javax.swing.JFrame {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Creates new form ALogin
@@ -60,6 +64,11 @@ public class ALogin extends javax.swing.JFrame {
         jLabel5.setText("To login as employee click");
 
         jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setText("show password");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -164,6 +173,17 @@ public class ALogin extends javax.swing.JFrame {
             password.setEchoChar('•');
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String pas = new String(password.getPassword());
+        if ((username.getText().equals("admin") && pas.equals("admin")) || (username.getText().equals("a") && pas.equals("a"))) {
+            new AdminForm().setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid username or password");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
