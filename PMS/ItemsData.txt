@@ -1,0 +1,1 @@
+laptop,electronics,80000,5,false

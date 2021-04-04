@@ -10,7 +10,7 @@ public class Items {
     private String category;
     private int price;
     private int quantity;
-    private boolean isConsumable;
+    private String isConsumable;
 
     public String getItemName() {
         return itemName;
@@ -28,7 +28,7 @@ public class Items {
         return quantity;
     }
 
-    public boolean isIsConsumable() {
+    public String getIsConsumable() {
         return isConsumable;
     }
 
@@ -48,7 +48,7 @@ public class Items {
         this.quantity = quantity;
     }
 
-    public void setIsConsumable(boolean isConsumable) {
+    public void setIsConsumable(String isConsumable) {
         this.isConsumable = isConsumable;
     }
 

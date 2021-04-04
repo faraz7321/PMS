@@ -11,10 +11,19 @@ package pms;
  */
 public class Requests {
 
+    private String empcode;
     private String empName;
     private String itemName;
     private int quantity;
     private String date;
+
+    public void setEmpcode(String empcode) {
+        this.empcode = empcode;
+    }
+
+    public String getEmpcode() {
+        return empcode;
+    }
 
     /**
      *
