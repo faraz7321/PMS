@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pms;
 
 import java.util.Random;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,8 +17,13 @@ public class AdminForm extends javax.swing.JFrame {
      */
     public AdminForm() {
         initComponents();
-        //PMS.loadData();
+        Admin.loadData();
+        Admin.loadRequests();
+        Admin.loadItems();
         printTableData();
+        printRequests();
+        jLabel28.setVisible(false);
+        jButton11.setVisible(false);
 
     }
 
@@ -33,11 +34,22 @@ public class AdminForm extends javax.swing.JFrame {
             String data2 = e.getEmail();
             String data3 = e.getCell();
             String data4 = e.getEmpCode();
-
             Object[] row = {data1, data2, data3, data4};
-
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.addRow(row);
+        }
+    }
 
+    public final void printRequests() {
+        for (int i = 0; i < Admin.request.size(); i++) {
+            Requests e = Admin.request.get(i);
+            String data1 = e.getEmpcode();
+            String data2 = e.getEmpName();
+            String data3 = e.getItemName();
+            String data4 = Integer.toString(e.getQuantity());
+            String data5 = e.getDate();
+            Object[] row = {data1, data2, data3, data4, data5};
+            DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
             model.addRow(row);
         }
     }
@@ -125,10 +137,12 @@ public class AdminForm extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jTextField16 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
-        jTabbedPane10 = new javax.swing.JTabbedPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jPanel11 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -226,7 +240,7 @@ public class AdminForm extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jButton5)
                     .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addComponent(jButton1))
         );
 
@@ -301,7 +315,7 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -387,7 +401,7 @@ public class AdminForm extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -425,6 +439,11 @@ public class AdminForm extends javax.swing.JFrame {
         jCheckBox1.setText("Consumable?");
 
         jButton7.setText("Save");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jLabel18.setText("Tip?");
         jLabel18.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -486,7 +505,7 @@ public class AdminForm extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(jCheckBox1)
                     .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jButton7)
                 .addContainerGap())
         );
@@ -576,7 +595,7 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
                     .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -614,6 +633,21 @@ public class AdminForm extends javax.swing.JFrame {
         jTextField16.setText("jTextField16");
 
         jButton10.setText("Search");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jLabel28.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel28.setText("Data Found!");
+
+        jButton11.setText("Delete");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -626,9 +660,13 @@ public class AdminForm extends javax.swing.JFrame {
                         .addComponent(jLabel27)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(217, 217, 217))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(97, 97, 97))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addComponent(jButton10)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton11)
+                            .addComponent(jButton10))
                         .addGap(269, 269, 269))))
         );
         jPanel9Layout.setVerticalGroup(
@@ -637,10 +675,13 @@ public class AdminForm extends javax.swing.JFrame {
                 .addGap(98, 98, 98)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27))
+                    .addComponent(jLabel27)
+                    .addComponent(jLabel28))
                 .addGap(18, 18, 18)
                 .addComponent(jButton10)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jButton11)
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Delete Item", jPanel9);
@@ -653,7 +694,7 @@ public class AdminForm extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
+            .addGap(0, 315, Short.MAX_VALUE)
         );
 
         jTabbedPane3.addTab("tab4", jPanel10);
@@ -671,19 +712,30 @@ public class AdminForm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Manage Inventory", jPanel2);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "EMP Code", "Name", "Item", "Quantity", "Date"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane3.setViewportView(jTable3);
 
-        jTabbedPane10.addTab("tab1", jScrollPane2);
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
-        jTabbedPane1.addTab("View Requests", jTabbedPane10);
+        jTabbedPane1.addTab("View Requests", jPanel11);
 
         jMenu1.setText("File");
 
@@ -730,47 +782,81 @@ public class AdminForm extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
+        Admin.deleteEmployee(jTextField16.getText());
+        JOptionPane.showMessageDialog(null, "Employee Deleted Successfully!");
+    }//GEN-LAST:event_jButton11ActionPerformed
 
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        if (Admin.searchEmployee(jTextField16.getText())) {
+            jLabel28.setVisible(true);
+            jButton11.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Employee Not Found!");
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField15ActionPerformed
+
+    private void jLabel24MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseMoved
+        // TODO add your handling code here:
+        jLabel24.setToolTipText("Check this box if the item is consumable");
+    }//GEN-LAST:event_jLabel24MouseMoved
+
+    private void jLabel18MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseMoved
+        // TODO add your handling code here:
+        jLabel18.setToolTipText("Check this box if the item is consumable");
+    }//GEN-LAST:event_jLabel18MouseMoved
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jLabel19MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel19MouseMoved
+        // TODO add your handling code here:
+        jLabel19.setToolTipText("Creates a random code for employee eg. emp12345");
+    }//GEN-LAST:event_jLabel19MouseMoved
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (Admin.addEmployee(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText())) {
+
+            JOptionPane.showMessageDialog(this, "Employee Added Successfully!");
+            this.setVisible(false);
+            new AdminForm().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error adding employee");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
         Random rand = new Random();
         int code = rand.nextInt(100000);
         jTextField4.setText("emp" + code);
-    }// GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton6ActionPerformed
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
-    }// GEN-LAST:event_jButton6ActionPerformed
-
-    private void jLabel18MouseMoved(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel18MouseMoved
-        // TODO add your handling code here:
-        jLabel18.setToolTipText("Check this box if the item is consumable");
-    }// GEN-LAST:event_jLabel18MouseMoved
-
-    private void jLabel19MouseMoved(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel19MouseMoved
-        // TODO add your handling code here:
-        jLabel19.setToolTipText("Creates a random code for employee eg. emp12345");
-    }// GEN-LAST:event_jLabel19MouseMoved
-
-    private void jLabel24MouseMoved(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel24MouseMoved
-        // TODO add your handling code here:
-        jLabel24.setToolTipText("Check this box if the item is consumable");
-    }// GEN-LAST:event_jLabel24MouseMoved
-
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jButton9ActionPerformed
-
-    private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField15ActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jTextField15ActionPerformed
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
@@ -783,24 +869,6 @@ public class AdminForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }// GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Employee e = new Employee();
-        e.setName(jTextField1.getText());
-        e.setEmail(jTextField2.getText());
-        e.setCell(jTextField3.getText());
-        e.setEmpCode(jTextField4.getText());
-        Admin.employees.add(e);
-        Admin.saveData();
-        this.setVisible(true);
-        new AdminForm().setVisible(true);
-
-    }// GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -822,13 +890,17 @@ public class AdminForm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminForm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         // </editor-fold>
 
@@ -841,6 +913,7 @@ public class AdminForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -873,6 +946,7 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -887,6 +961,7 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -896,15 +971,14 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane10;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;

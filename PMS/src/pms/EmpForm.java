@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pms;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -181,21 +174,13 @@ public class EmpForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Requests req = new Requests();
-        //req.setEmpcode();
-        // req.setEmpName();
 
-        req.setItemName(jComboBox2.getSelectedItem().toString());
-        req.setQuantity((Integer) jSpinner1.getValue());
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy 'at' HH:mm:ss");
-        Date date = new Date(System.currentTimeMillis());
-        String strDate = formatter.format(date);
-        req.setDate(strDate);
-        Admin.request.add(req);
-        //System.out.print(req.getDate() + req.getCategory() + req.getQuantity());
-        JOptionPane.showMessageDialog(null, "Request has been made suyccessfully!\n"
-                + "You will be notified on your email when request is approved by the admin.");
+        if (Employee.requestItem(jComboBox2.getSelectedItem().toString(), (Integer) jSpinner1.getValue())) {
+            JOptionPane.showMessageDialog(null, "Request has been made suyccessfully!\n"
+                    + "You will be notified on your email when request is approved by the admin.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Request cannot be made at this moment");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

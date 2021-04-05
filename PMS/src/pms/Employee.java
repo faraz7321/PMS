@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pms;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -46,6 +44,18 @@ public class Employee {
 
     public void setCell(String cell) {
         this.cell = cell;
+    }
+
+    static boolean requestItem(String item, int quantity) {
+        Requests req = new Requests();
+        req.setItemName(item);
+        req.setQuantity(quantity);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy 'at' HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        String strDate = formatter.format(date);
+        req.setDate(strDate);
+        Admin.request.add(req);
+        return true;
     }
 
 }
