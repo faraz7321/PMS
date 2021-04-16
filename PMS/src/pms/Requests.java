@@ -7,10 +7,19 @@ package pms;
 public class Requests {
 
     private String empcode;
-    private String empName;
+    private String empEmail;
     private String itemName;
     private int quantity;
     private String date;
+    private String status;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 
     public void setEmpcode(String empcode) {
         this.empcode = empcode;
@@ -24,8 +33,8 @@ public class Requests {
      *
      * @return
      */
-    public String getEmpName() {
-        return empName;
+    public String getEmail() {
+        return empEmail;
     }
 
     /**
@@ -54,10 +63,10 @@ public class Requests {
 
     /**
      *
-     * @param empName
+     * @param empEmail
      */
-    public void setEmpName(String empName) {
-        this.empName = empName;
+    public void setEmail(String empEmail) {
+        this.empEmail = empEmail;
     }
 
     /**

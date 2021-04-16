@@ -52,16 +52,19 @@ public class Employee {
         this.cell = cell;
     }
 
-    static boolean requestItem(String item, int quantity) {
-        Admin obj = Admin.getInstance();
+    static boolean requestItem(String empcode, String empemail, String item, String quantity) {
         Requests req = new Requests();
+        req.setEmail(empemail);
+        req.setEmpcode(empcode);
         req.setItemName(item);
-        req.setQuantity(quantity);
+        req.setQuantity(Integer.parseInt(quantity));
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy 'at' HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         String strDate = formatter.format(date);
         req.setDate(strDate);
-        obj.request.add(req);
+        req.setStatus("pending");
+        Admin.getInstance().request.add(req);
+        Admin.getInstance().saveRequests();
         return true;
     }
 

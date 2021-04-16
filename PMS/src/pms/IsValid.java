@@ -67,4 +67,14 @@ public class IsValid {
         return flag;
     }
 
+    /*char[] arr = cell.toCharArray();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] <= '0' && arr[i] >= '9') {
+                flag = true;
+                System.out.println("Valid");
+            } else {
+                flag = false;
+                System.out.println("Invalid");
+            }
+        }*/
 }

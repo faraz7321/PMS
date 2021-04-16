@@ -46,12 +46,14 @@ public class AdminForm extends javax.swing.JFrame {
     public final void printRequests() {
         for (int i = 0; i < Admin.getInstance().request.size(); i++) {
             Requests e = Admin.getInstance().request.get(i);
+            String data0 = String.valueOf(i + 1);
             String data1 = e.getEmpcode();
-            String data2 = e.getEmpName();
+            String data2 = e.getEmail();
             String data3 = e.getItemName();
             String data4 = Integer.toString(e.getQuantity());
             String data5 = e.getDate();
-            Object[] row = {data1, data2, data3, data4, data5};
+            String data6 = e.getStatus();
+            Object[] row = {data0, data1, data2, data3, data4, data5, data6};
             DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
             model.addRow(row);
         }
@@ -65,7 +67,8 @@ public class AdminForm extends javax.swing.JFrame {
             String data3 = Integer.toString(e.getPrice());
             String data4 = Integer.toString(e.getQuantity());
             String data5 = e.getIsConsumable();
-            Object[] row = {data1, data2, data3, data4, data5};
+            String data6 = e.getBarcode();
+            Object[] row = {data1, data2, data3, data4, data5, data6};
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             model.addRow(row);
         }
@@ -100,6 +103,9 @@ public class AdminForm extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
@@ -113,13 +119,12 @@ public class AdminForm extends javax.swing.JFrame {
         jTextField9 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel32 = new javax.swing.JLabel();
+        jTextField18 = new javax.swing.JTextField();
+        jButton12 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
@@ -151,16 +156,19 @@ public class AdminForm extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jTextField15 = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel27 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jButton13 = new javax.swing.JButton();
+        jLabel33 = new javax.swing.JLabel();
+        jTextField19 = new javax.swing.JTextField();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        jTextField17 = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -182,9 +190,41 @@ public class AdminForm extends javax.swing.JFrame {
 
         jLabel5.setText("EMP Code");
 
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField1FocusLost(evt);
+            }
+        });
+        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextField1MouseClicked(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
+
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField2FocusLost(evt);
+            }
+        });
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
+            }
+        });
+
+        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField3FocusLost(evt);
+            }
+        });
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
             }
         });
 
@@ -231,7 +271,11 @@ public class AdminForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel19)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel30)
+                    .addComponent(jLabel31))
                 .addContainerGap(357, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -244,15 +288,18 @@ public class AdminForm extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel30))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel31))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,45 +410,6 @@ public class AdminForm extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Update Employee", jPanel6);
 
-        jLabel11.setText("Employee code");
-
-        jButton4.setText("Search");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(jButton4)))
-                .addContainerGap(292, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Delete Employee", jPanel5);
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -412,18 +420,45 @@ public class AdminForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel32.setText("Enter EMP Code to Delete");
+
+        jTextField18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField18ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setText("Delete");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton12))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("View All Employees", jPanel7);
@@ -522,7 +557,7 @@ public class AdminForm extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(jCheckBox1)
                     .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(jButton6)
                 .addContainerGap())
         );
@@ -557,7 +592,7 @@ public class AdminForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel26.setText("Enter Item Name");
+        jLabel26.setText("Enter Item Barcode");
 
         jTextField15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -581,16 +616,18 @@ public class AdminForm extends javax.swing.JFrame {
                 .addComponent(jButton8)
                 .addGap(19, 19, 19))
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(218, 218, 218)
+                .addGap(203, 203, 203)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel26))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel8Layout.createSequentialGroup()
                         .addComponent(jTextField15, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
@@ -609,7 +646,7 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
                     .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -642,67 +679,55 @@ public class AdminForm extends javax.swing.JFrame {
 
         jTabbedPane3.addTab("Update Item", jPanel8);
 
-        jLabel27.setText("Item Name");
-
-        jTextField16.setText("jTextField16");
-
-        jButton9.setText("Search and Delete");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(218, Short.MAX_VALUE)
-                .addComponent(jLabel27)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(323, 323, 323))
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(320, 320, 320)
-                .addComponent(jButton9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27))
-                .addGap(31, 31, 31)
-                .addComponent(jButton9)
-                .addContainerGap(142, Short.MAX_VALUE))
-        );
-
-        jTabbedPane3.addTab("Delete Item", jPanel9);
-
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Item", "Category", "Price", "Quantity", "Is Consumable?"
+                "Item", "Category", "Price", "Quantity", "Is Consumable?", "Barcode"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
+
+        jButton13.setText("Delete");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        jLabel33.setText("Enter Barcode to Delete Item");
+
+        jTextField19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField19ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton13)
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton13)
+                    .addComponent(jLabel33)
+                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("View Items", jPanel10);
@@ -715,7 +740,9 @@ public class AdminForm extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane3)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jTabbedPane3)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Manage Inventory", jPanel2);
@@ -725,25 +752,56 @@ public class AdminForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "EMP Code", "Name", "Item", "Quantity", "Date"
+                "Index", "EMP Code", "Email", "Item", "Quantity", "Date", "Status"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
+        if (jTable3.getColumnModel().getColumnCount() > 0) {
+            jTable3.getColumnModel().getColumn(0).setPreferredWidth(4);
+        }
+
+        jLabel28.setText("Enter Index");
+
+        jButton10.setText("Action");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel28)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton10))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28)
+                    .addComponent(jButton10))
+                .addGap(15, 15, 15))
         );
 
         jTabbedPane1.addTab("View Requests", jPanel11);
+
+        jButton11.setText("Total Purchases");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -790,14 +848,22 @@ public class AdminForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(350, 350, 350)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton11)
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton11)
+                        .addGap(18, 18, 18)))
                 .addComponent(jTabbedPane1))
         );
 
@@ -842,18 +908,6 @@ public class AdminForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        if (!Admin.getInstance().deleteEmployee(jTextField10.getText())) {
-            JOptionPane.showMessageDialog(this, "Employee Not Found!");
-        } else {
-            this.setVisible(false);
-            new AdminForm().setVisible(true);
-        }
-        // JOptionPane.showMessageDialog(this, "Employee Deleted Successfully!");
-
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         Admin.getInstance().saveData();
@@ -895,7 +949,7 @@ public class AdminForm extends javax.swing.JFrame {
             this.setVisible(false);
             new AdminForm().setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "Item could not be added right now");
+            JOptionPane.showMessageDialog(null, "Item could not be updated right now");
         }
 
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -903,12 +957,9 @@ public class AdminForm extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         String search = jTextField15.getText();
-        // Employee employe =new Employee();
-        String name = "";
         String price = "";
         for (int i = 0; i < Admin.getInstance().item.size(); i++) {
-            name = Admin.getInstance().item.get(i).getItemName();
-            if (name.contains(search)) {
+            if (Admin.getInstance().item.get(i).getBarcode().equals(search)) {
                 jTextField14.setText(Admin.getInstance().item.get(i).getItemName());
                 jSpinner2.setValue(Admin.getInstance().item.get(i).getQuantity());
                 price = String.valueOf((Admin.getInstance().item.get(i).getPrice()));
@@ -923,22 +974,136 @@ public class AdminForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-        if (!Admin.getInstance().deleteItem(jTextField16.getText())) {
+        String index = jTextField17.getText();
+        int x = Integer.parseInt(index);
+        int i = x - 1;
+        String empcode = Admin.getInstance().request.get(i).getEmpcode();
+        String email = Admin.getInstance().request.get(i).getEmail();
+        String itemname = Admin.getInstance().request.get(i).getItemName();
+        String date = Admin.getInstance().request.get(i).getDate();
+        String quan = String.valueOf(Admin.getInstance().request.get(i).getQuantity());
+        Object[] options = {"Approve", "Delete"};
+
+        if (!Admin.getInstance().request.get(i).getDate().equals("approved")) {
+            int n = JOptionPane.showOptionDialog(null, "Are you want to continue the process?", "Requests",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                    null, options, options[0]);
+            // JOptionPane.showConfirmDialog(null, "Press OK to Approve Request and Cancel to delete");
+
+            if (n == 0) {
+                JOptionPane.showMessageDialog(this, "REQUEST APPROVED!\n\n"
+                        + "EMP CODE: " + empcode
+                        + "\nEMAIL: " + email
+                        + "\nITEM: " + itemname
+                        + "\nQuantity" + quan
+                        + "\nDATE: " + date
+                        + "\n\nSignature: ");
+                Admin.getInstance().request.get(i).setStatus("approved");
+                Admin.getInstance().saveRequests();
+                this.setVisible(false);
+                new AdminForm().setVisible(true);
+
+            } else if (n == 1) {
+                JOptionPane.showMessageDialog(this, "REQUEST DELETED!");
+                Admin.getInstance().request.remove(i);
+                Admin.getInstance().saveRequests();
+                this.setVisible(false);
+                new AdminForm().setVisible(true);
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "REQUEST ALREADY APPROVED!");
+        }
+
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        int total = 0;
+        for (int i = 0; i < Admin.getInstance().item.size(); i++) {
+            total = total + (Admin.getInstance().item.get(i).getPrice() * Admin.getInstance().item.get(i).getQuantity());
+        }
+        JOptionPane.showMessageDialog(this, "Total Cost of items:\nRs." + total);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jTextField1MouseClicked
+
+    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        // TODO add your handling code here:
+        if (!IsValid.getInstance().text(jTextField1.getText())) {
+            jLabel29.setText("Invalid!");
+            jLabel29.setVisible(true);
+        } else {
+            jLabel29.setText("");
+            jLabel29.setVisible(false);
+        }
+    }//GEN-LAST:event_jTextField1FocusLost
+
+    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
+        // TODO add your handling code here:
+        if (!IsValid.getInstance().email(jTextField2.getText())) {
+            jLabel30.setText("Invalid!");
+            jLabel30.setVisible(true);
+        } else {
+            jLabel30.setText("");
+            jLabel30.setVisible(false);
+        }
+    }//GEN-LAST:event_jTextField2FocusLost
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+        // TODO add your handling code here:
+        if (!IsValid.getInstance().cell(jTextField3.getText())) {
+            jLabel31.setText("Invalid!");
+            jLabel31.setVisible(true);
+        } else {
+            jLabel31.setText("");
+            jLabel31.setVisible(false);
+        }
+    }//GEN-LAST:event_jTextField3FocusLost
+
+    private void jTextField18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField18ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+        String del = jTextField18.getText();
+        if (!Admin.getInstance().deleteEmployee(del)) {
             JOptionPane.showMessageDialog(this, "Employee Not Found!");
         } else {
             this.setVisible(false);
             new AdminForm().setVisible(true);
         }
+    }//GEN-LAST:event_jButton12ActionPerformed
 
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton11ActionPerformed
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
-        Admin.getInstance().deleteEmployee(jTextField16.getText());
-        JOptionPane.showMessageDialog(null, "Employee Deleted Successfully!");
-    }// GEN-LAST:event_jButton11ActionPerformed
+        if (!Admin.getInstance().deleteItem(jTextField19.getText())) {
+            JOptionPane.showMessageDialog(this, "Item Not Found!");
+        } else {
+            this.setVisible(false);
+            new AdminForm().setVisible(true);
+        }
+
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField19ActionPerformed
 
     private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField15ActionPerformed
         // TODO add your handling code here:
@@ -961,15 +1126,20 @@ public class AdminForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (Admin.getInstance().addEmployee(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(),
-                jTextField4.getText())) {
+        if (!jLabel29.getText().equals("Invalid!") && !jLabel30.getText().equals("Invalid!") && !jLabel31.getText().equals("Invalid!")) {
+            if (Admin.getInstance().addEmployee(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(),
+                    jTextField4.getText())) {
 
-            JOptionPane.showMessageDialog(this, "Employee Added Successfully!");
-            this.setVisible(false);
-            new AdminForm().setVisible(true);
+                JOptionPane.showMessageDialog(this, "Employee Added Successfully!");
+                this.setVisible(false);
+                new AdminForm().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Error adding employee");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Error adding employee");
+            JOptionPane.showMessageDialog(this, "Invalid inputs! Please check again.");
         }
+
     }// GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton5ActionPerformed
@@ -1032,21 +1202,22 @@ public class AdminForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1063,8 +1234,13 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1083,11 +1259,9 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1100,13 +1274,14 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
+    private javax.swing.JTextField jTextField17;
+    private javax.swing.JTextField jTextField18;
+    private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;

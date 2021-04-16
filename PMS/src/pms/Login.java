@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
+    static String empemail;
     private static final long serialVersionUID = 1L;
 
     /**
@@ -159,6 +160,8 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         Admin admin = Admin.getInstance();
         admin.loadData();
+        empemail = username.getText();
+
         String pas = new String(password.getPassword());
         if (admin.Login(username.getText(), pas)) {
             new EmpForm().setVisible(true);

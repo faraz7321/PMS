@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -40,7 +41,7 @@ public class Admin {
         employees.removeAll(employees);
 
         try {
-            Scanner br = new Scanner(new File("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\employeeData.txt"));
+            Scanner br = new Scanner(new File("employeeData.txt"));
             while (br.hasNextLine()) {
                 String line = br.nextLine();
                 String[] arr = line.split(",");
@@ -61,7 +62,7 @@ public class Admin {
     public void loadItems() {
         try {
             item.removeAll(item);
-            Scanner scanner = new Scanner(new File("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\itemsData.txt"));
+            Scanner scanner = new Scanner(new File("itemsData.txt"));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] arr = line.split(",");
@@ -71,6 +72,7 @@ public class Admin {
                 it.setPrice(Integer.parseInt(arr[2]));
                 it.setQuantity(Integer.parseInt(arr[3]));
                 it.setIsConsumable(arr[4]);
+                it.setBarcode(arr[5]);
                 item.add(it);
                 System.out.println(line);
             }
@@ -83,16 +85,17 @@ public class Admin {
     public void loadRequests() {
         try {
             request.removeAll(request);
-            Scanner scanner = new Scanner(new File("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\requests.txt"));
+            Scanner scanner = new Scanner(new File("requests.txt"));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] arr = line.split(",");
                 Requests reqs = new Requests();
                 reqs.setEmpcode(arr[0]);
-                reqs.setEmpName(arr[1]);
+                reqs.setEmail(arr[1]);
                 reqs.setItemName(arr[2]);
                 reqs.setQuantity(Integer.parseInt(arr[3]));
                 reqs.setDate(arr[4]);
+                reqs.setStatus(arr[5]);
                 request.add(reqs);
                 System.out.println(line);
             }
@@ -104,7 +107,7 @@ public class Admin {
     public void saveData() {
 
         try {
-            try (FileWriter myWriter = new FileWriter("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\employeeData.txt")) {
+            try (FileWriter myWriter = new FileWriter("employeeData.txt")) {
                 for (int i = 0; i < employees.size(); i++) {
                     Employee e = employees.get(i);
                     myWriter.write(e.getName() + "," + e.getEmail() + "," + e.getCell() + "," + e.getEmpCode() + "\n");
@@ -144,10 +147,10 @@ public class Admin {
 
     public void saveItems() {
         try {
-            try (FileWriter myWriter = new FileWriter("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\itemsData.txt")) {
+            try (FileWriter myWriter = new FileWriter("itemsData.txt")) {
                 for (int i = 0; i < item.size(); i++) {
                     Items it = item.get(i);
-                    myWriter.write(it.getItemName() + "," + it.getCategory() + "," + it.getPrice() + "," + it.getQuantity() + "," + it.getIsConsumable() + "\n");
+                    myWriter.write(it.getItemName() + "," + it.getCategory() + "," + it.getPrice() + "," + it.getQuantity() + "," + it.getIsConsumable() + "," + it.getBarcode() + "\n");
                 }
             }
             System.out.println("Successfully wrote to the file.");
@@ -158,10 +161,10 @@ public class Admin {
 
     public void saveRequests() {
         try {
-            try (FileWriter myWriter = new FileWriter("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\requests.txt")) {
-                for (int i = 0; i < item.size(); i++) {
+            try (FileWriter myWriter = new FileWriter("requests.txt")) {
+                for (int i = 0; i < request.size(); i++) {
                     Requests it = request.get(i);
-                    myWriter.write(it.getEmpcode() + "," + it.getEmpName() + "," + it.getItemName() + "," + it.getQuantity() + "," + it.getDate() + "\n");
+                    myWriter.write(it.getEmpcode() + "," + it.getEmail() + "," + it.getItemName() + "," + it.getQuantity() + "," + it.getDate() + "," + it.getStatus() + "\n");
                 }
             }
             System.out.println("Successfully wrote to the file.");
@@ -203,16 +206,20 @@ public class Admin {
         boolean flag = false;
         for (int i = 0; i < employees.size(); i++) {
             if (employees.get(i).getEmpCode().equals(code)) {
-                int x = JOptionPane.showConfirmDialog(null, "Employee Found!\n" + employees.get(i).getName() + "\nAre you sure you want to delete this employee?");
-                if (x == 0) {
-                    employees.remove(i);
-                    saveData();
-                    JOptionPane.showMessageDialog(null, "Employee Deleted Successfully!");
-                    flag = true;
-                } else if (x == 1) {
-                    flag = true;
-                } else {
-                    flag = true;
+                int x = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this employee?");
+                switch (x) {
+                    case 0:
+                        employees.remove(i);
+                        saveData();
+                        JOptionPane.showMessageDialog(null, "Employee Deleted Successfully!");
+                        flag = true;
+                        break;
+                    case 1:
+                        flag = true;
+                        break;
+                    default:
+                        flag = true;
+                        break;
                 }
                 break;
             }
@@ -254,6 +261,11 @@ public class Admin {
         it.setPrice(price);
         it.setQuantity(quantity);
         it.setIsConsumable(consm);
+        Random rand = new Random(); //instance of random class
+        int upperbound = 10000;
+        //generate random values from 0-9999
+        int bar = rand.nextInt(upperbound);
+        it.setBarcode(String.valueOf(bar));
         saveItems();
         item.add(it);
         return true;
@@ -262,7 +274,7 @@ public class Admin {
     public boolean updateItem(String search, String name, String category, int price, int quantity, String consm) {
         boolean flag = false;
         for (int i = 0; i < item.size(); i++) {
-            if (item.get(i).getItemName().equals(search)) {
+            if (item.get(i).getBarcode().equals(search)) {
                 Items e = new Items();
                 item.get(i).setItemName(name);
                 item.get(i).setCategory(category);
@@ -282,10 +294,10 @@ public class Admin {
         boolean flag = false;
         for (int i = 0; i < item.size(); i++) {
             if (item.get(i).getBarcode().equals(code)) {
-                int x = JOptionPane.showConfirmDialog(null, "Item Found!\n" + item.get(i).getBarcode() + "\nAre you sure you want to delete this item?");
+                int x = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this item?");
                 if (x == 0) {
                     item.remove(i);
-                    saveData();
+                    saveItems();
                     JOptionPane.showMessageDialog(null, "Item Deleted Successfully!");
                     flag = true;
                 } else if (x == 1) {
@@ -310,4 +322,28 @@ public class Admin {
 
         return flag;
     }
+
+    public String empDet(String email) {
+        String emp = "";
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getEmail().equals(email)) {
+                emp = employees.get(i).getEmpCode();
+                break;
+            }
+        }
+        return emp;
+    }
+
+    public int quantity(String itemname) {
+        int q = 0;
+        for (int i = 0; i < item.size(); i++) {
+            if (itemname.equals(item.get(i).getItemName())) {
+                q = item.get(i).getQuantity();
+                break;
+            }
+        }
+
+        return q;
+    }
+
 }

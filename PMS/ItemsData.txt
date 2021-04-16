@@ -1,0 +1,12 @@
+Asus Zenbook i9,laptop,500000,8,false,0001
+HP Notebook i5,laptop,100000,2,false,0002
+HP Notebook i7,laptop,150000,6,false,0003
+HP Notebook i3,laptop,120000,10,false,0004
+Dell sasta wala,laptop,50000,8,false,0006
+Screw,tools,5,10,true,1234
+Stapler,stationary,10,300,false,7482
+Stapler Pins,stationary,600,100,true,9763
+Headphones,electronics,3,400,false,7235
+Windows 10 Pro,software,10,3000,false,9287
+surf eksel,cleaning,4,4000,true,6844
+cocomo,Software,5,2130,true,3
