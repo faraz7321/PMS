@@ -68,4 +68,24 @@ public class Employee {
         return true;
     }
 
+    public final Object[] printTableData() {
+        // DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        //  model.getDataVector().removeAllElements();
+        Admin.getInstance().loadRequests();
+        Object[] row = new Object[4];
+        for (int i = 0; i < Admin.getInstance().request.size(); i++) {
+            if (Admin.getInstance().request.get(i).getEmail().equals(Login.empemail)) {
+                Requests e = Admin.getInstance().request.get(i);
+                row[0] = e.getItemName();
+                row[1] = String.valueOf(e.getQuantity());
+                row[2] = e.getDate();
+                row[3] = e.getStatus();
+                //model.addRow(row);
+            }
+        }
+        return row;
+        // return
+
+    }
+
 }

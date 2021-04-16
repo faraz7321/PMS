@@ -254,7 +254,6 @@ public class Admin {
     }
 
     public boolean addItem(String name, String category, int price, int quantity, String consm) {
-
         Items it = new Items();
         it.setItemName(name);
         it.setCategory(category);
@@ -342,7 +341,6 @@ public class Admin {
                 break;
             }
         }
-
         return q;
     }
 

@@ -72,6 +72,14 @@ public class EmpForm extends javax.swing.JFrame {
         jLabel4.setText("Select Category");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laptop", "Stationary", "Tools", "Electronics", "Software", "Cleaning" }));
+        jComboBox1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jComboBox1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jComboBox1FocusLost(evt);
+            }
+        });
         jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jComboBox1MouseClicked(evt);
@@ -267,6 +275,7 @@ public class EmpForm extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         jComboBox2.removeAllItems();
+        jComboBox3.removeAllItems();
         String select = jComboBox1.getSelectedItem().toString().toLowerCase();
         for (int i = 0; i < Admin.getInstance().item.size(); i++) {
             if (select.equals(Admin.getInstance().item.get(i).getCategory())) {
@@ -279,7 +288,6 @@ public class EmpForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
-        // TODO add your handling code here:
 
     }//GEN-LAST:event_jComboBox1MouseClicked
 
@@ -301,6 +309,15 @@ public class EmpForm extends javax.swing.JFrame {
         //Admin.getInstance().loadRequests();
         printTableData();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusLost
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jComboBox1FocusLost
+
+    private void jComboBox1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1FocusGained
 
     /**
      * @param args the command line arguments

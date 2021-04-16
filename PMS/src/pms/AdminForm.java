@@ -28,6 +28,7 @@ public class AdminForm extends javax.swing.JFrame {
         printTableData();
         printRequests();
         printItems();
+        jLabel11.setText("");
     }
 
     public final void printTableData() {
@@ -110,7 +111,6 @@ public class AdminForm extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -119,6 +119,8 @@ public class AdminForm extends javax.swing.JFrame {
         jTextField9 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -327,7 +329,7 @@ public class AdminForm extends javax.swing.JFrame {
 
         jLabel9.setText("EMP Code");
 
-        jLabel10.setText("Emp Code");
+        jLabel10.setText("Search");
 
         jButton2.setText("Search");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -342,6 +344,10 @@ public class AdminForm extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+
+        jLabel11.setText("jLabel11");
+
+        jLabel27.setText("emp");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -368,10 +374,12 @@ public class AdminForm extends javax.swing.JFrame {
                             .addComponent(jTextField6)
                             .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel27)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jTextField8))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 387, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -381,12 +389,12 @@ public class AdminForm extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2)))
+                .addContainerGap(59, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel27))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -401,9 +409,9 @@ public class AdminForm extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(49, 49, 49)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11))
+                .addGap(52, 52, 52)
                 .addComponent(jButton3)
                 .addContainerGap())
         );
@@ -875,7 +883,7 @@ public class AdminForm extends javax.swing.JFrame {
         String name = jTextField5.getText();
         String email = jTextField6.getText();
         String cell = jTextField7.getText();
-        String code = jTextField8.getText();
+        String code = jLabel11.getText();
         // System.out.print("1");
         if (IsValid.getInstance().text(name) && IsValid.getInstance().email(email)
                 && IsValid.getInstance().cell(cell)) {
@@ -890,14 +898,14 @@ public class AdminForm extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String code = jTextField9.getText();
+        String code = jLabel27.getText() + jTextField9.getText();
         // Employee employe =new Employee();
         for (int i = 0; i < Admin.getInstance().employees.size(); i++) {
             if (Admin.getInstance().employees.get(i).getEmpCode().equals(code)) {
                 jTextField5.setText(Admin.getInstance().employees.get(i).getName());
                 jTextField6.setText(Admin.getInstance().employees.get(i).getEmail());
                 jTextField7.setText(Admin.getInstance().employees.get(i).getCell());
-                jTextField8.setText(Admin.getInstance().employees.get(i).getEmpCode());
+                jLabel11.setText(Admin.getInstance().employees.get(i).getEmpCode());
                 break;
             }
         }
@@ -997,7 +1005,7 @@ public class AdminForm extends javax.swing.JFrame {
                         + "EMP CODE: " + empcode
                         + "\nEMAIL: " + email
                         + "\nITEM: " + itemname
-                        + "\nQuantity" + quan
+                        + "\nQuantity: " + quan
                         + "\nDATE: " + date
                         + "\n\nSignature: ");
                 Admin.getInstance().request.get(i).setStatus("approved");
@@ -1145,8 +1153,20 @@ public class AdminForm extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         Random rand = new Random();
-        int code = rand.nextInt(100000);
-        jTextField4.setText("emp" + code);
+        String code = "";
+        String emp = "";
+        for (int i = 0; i < 3; i++) {
+            Random r = new Random();
+            char c = (char) (rand.nextInt(26) + 'a');
+            emp += String.valueOf(c);
+        }
+        for (int i = 0; i < 4; i++) {
+            Random r = new Random();
+            int n = rand.nextInt(10);
+            code += String.valueOf(n);
+        }
+        // System.out.println(emp + code);
+        jTextField4.setText(emp + code);
     }// GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField2ActionPerformed
@@ -1218,6 +1238,7 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1234,6 +1255,7 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -1288,7 +1310,6 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,8 +11,6 @@ public class PMS {
      *
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        // ArrayList<Admin> admin = new ArrayList<>();
         Login login = new Login();
         login.setVisible(true);
     }

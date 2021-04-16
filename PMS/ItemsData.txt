@@ -4,6 +4,7 @@ HP Notebook i7,laptop,150000,6,false,0003
 HP Notebook i3,laptop,120000,10,false,0004
 Dell sasta wala,laptop,50000,8,false,0006
 Screw,tools,5,10,true,1234
+Screw Driver,tools,4,300,false,2438
 Stapler,stationary,10,300,false,7482
 Stapler Pins,stationary,600,100,true,9763
 Headphones,electronics,3,400,false,7235
