@@ -1,5 +1,6 @@
 package pms;
 
+import java.awt.Color;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -120,7 +121,9 @@ public class AdminForm extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -315,9 +318,26 @@ public class AdminForm extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Add New Employee", jPanel3);
 
+        jTextField5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField5FocusLost(evt);
+            }
+        });
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
+            }
+        });
+
+        jTextField6.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField6FocusLost(evt);
+            }
+        });
+
+        jTextField7.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField7FocusLost(evt);
             }
         });
 
@@ -347,7 +367,11 @@ public class AdminForm extends javax.swing.JFrame {
 
         jLabel11.setText("jLabel11");
 
-        jLabel27.setText("emp");
+        jLabel34.setForeground(new java.awt.Color(255, 0, 51));
+
+        jLabel35.setForeground(new java.awt.Color(255, 0, 51));
+
+        jLabel36.setForeground(new java.awt.Color(255, 0, 51));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -374,13 +398,16 @@ public class AdminForm extends javax.swing.JFrame {
                             .addComponent(jTextField6)
                             .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel27)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 387, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel35)
+                            .addComponent(jLabel36))
+                        .addGap(0, 369, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton3)))
@@ -393,20 +420,22 @@ public class AdminForm extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel27))
+                    .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel34))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel35))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel36))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -885,20 +914,22 @@ public class AdminForm extends javax.swing.JFrame {
         String cell = jTextField7.getText();
         String code = jLabel11.getText();
         // System.out.print("1");
-        if (IsValid.getInstance().text(name) && IsValid.getInstance().email(email)
-                && IsValid.getInstance().cell(cell)) {
+
+        if (!jLabel34.getText().equals("Invalid!") && !jLabel35.getText().equals("Invalid!") && !jLabel36.getText().equals("Invalid!")) {
             //System.out.print("2");
             if (Admin.getInstance().updateEmployee(name, email, cell, code)) {
                 JOptionPane.showMessageDialog(this, "Employee updated Successfully!");
                 this.setVisible(false);
                 new AdminForm().setVisible(true);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid Inputs! Please check again.");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String code = jLabel27.getText() + jTextField9.getText();
+        String code = jTextField9.getText();
         // Employee employe =new Employee();
         for (int i = 0; i < Admin.getInstance().employees.size(); i++) {
             if (Admin.getInstance().employees.get(i).getEmpCode().equals(code)) {
@@ -1049,6 +1080,7 @@ public class AdminForm extends javax.swing.JFrame {
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
         // TODO add your handling code here:
         if (!IsValid.getInstance().text(jTextField1.getText())) {
+            jLabel29.setForeground(Color.red);
             jLabel29.setText("Invalid!");
             jLabel29.setVisible(true);
         } else {
@@ -1060,6 +1092,7 @@ public class AdminForm extends javax.swing.JFrame {
     private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
         // TODO add your handling code here:
         if (!IsValid.getInstance().email(jTextField2.getText())) {
+            jLabel30.setForeground(Color.red);
             jLabel30.setText("Invalid!");
             jLabel30.setVisible(true);
         } else {
@@ -1075,6 +1108,7 @@ public class AdminForm extends javax.swing.JFrame {
     private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
         // TODO add your handling code here:
         if (!IsValid.getInstance().cell(jTextField3.getText())) {
+            jLabel31.setForeground(Color.red);
             jLabel31.setText("Invalid!");
             jLabel31.setVisible(true);
         } else {
@@ -1112,6 +1146,39 @@ public class AdminForm extends javax.swing.JFrame {
     private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField19ActionPerformed
+
+    private void jTextField5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusLost
+        // TODO add your handling code here:
+        if (!IsValid.getInstance().text(jTextField5.getText())) {
+            jLabel34.setText("Invalid!");
+            jLabel34.setVisible(true);
+        } else {
+            jLabel34.setText("");
+            jLabel34.setVisible(false);
+        }
+    }//GEN-LAST:event_jTextField5FocusLost
+
+    private void jTextField6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField6FocusLost
+        // TODO add your handling code here:
+        if (!IsValid.getInstance().email(jTextField6.getText())) {
+            jLabel35.setText("Invalid!");
+            jLabel35.setVisible(true);
+        } else {
+            jLabel35.setText("");
+            jLabel35.setVisible(false);
+        }
+    }//GEN-LAST:event_jTextField6FocusLost
+
+    private void jTextField7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField7FocusLost
+        // TODO add your handling code here:
+        if (!IsValid.getInstance().cell(jTextField7.getText())) {
+            jLabel36.setText("Invalid!");
+            jLabel36.setVisible(true);
+        } else {
+            jLabel36.setText("");
+            jLabel36.setVisible(false);
+        }
+    }//GEN-LAST:event_jTextField7FocusLost
 
     private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField15ActionPerformed
         // TODO add your handling code here:
@@ -1255,7 +1322,6 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -1263,6 +1329,9 @@ public class AdminForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
