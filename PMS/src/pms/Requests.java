@@ -13,18 +13,34 @@ public class Requests {
     private String date;
     private String status;
 
+    /**
+     *
+     * @param status
+     */
     public void setStatus(String status) {
         this.status = status;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     *
+     * @param empcode
+     */
     public void setEmpcode(String empcode) {
         this.empcode = empcode;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmpcode() {
         return empcode;
     }

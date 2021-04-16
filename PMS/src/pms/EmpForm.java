@@ -21,6 +21,9 @@ public class EmpForm extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     *
+     */
     public final void printTableData() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.getDataVector().removeAllElements();

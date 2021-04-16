@@ -32,6 +32,9 @@ public class AdminForm extends javax.swing.JFrame {
         jLabel11.setText("");
     }
 
+    /**
+     *
+     */
     public final void printTableData() {
         for (int i = 0; i < Admin.getInstance().employees.size(); i++) {
             Employee e = Admin.getInstance().employees.get(i);
@@ -45,6 +48,9 @@ public class AdminForm extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     public final void printRequests() {
         for (int i = 0; i < Admin.getInstance().request.size(); i++) {
             Requests e = Admin.getInstance().request.get(i);
@@ -61,6 +67,9 @@ public class AdminForm extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     public final void printItems() {
         for (int i = 0; i < Admin.getInstance().item.size(); i++) {
             Items e = Admin.getInstance().item.get(i);

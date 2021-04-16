@@ -26,6 +26,11 @@ public class IsValid {
 
     private static final String regex = "^(.+)@(.+)$";
 
+    /**
+     *
+     * @param text
+     * @return
+     */
     public boolean text(String text) {
         boolean flag = false;
         char[] arr = text.toCharArray();
@@ -40,6 +45,11 @@ public class IsValid {
         return flag;
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     */
     public boolean email(String email) {
         boolean flag = false;
         Pattern pattern = Pattern.compile(regex);
@@ -54,6 +64,11 @@ public class IsValid {
         return flag;
     }
 
+    /**
+     *
+     * @param cell
+     * @return
+     */
     public boolean cell(String cell) {
         boolean flag = false;
         if (cell.matches("[0-9]+")) {

@@ -16,38 +16,75 @@ public class Employee {
     private String email;
     private String cell;
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmpCode() {
         return empCode;
     }
 
+    /**
+     *
+     * @param emp
+     * @return
+     */
     public String getEmpCode(String emp) {
         return empCode;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCell() {
         return cell;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @param empCode
+     */
     public void setEmpCode(String empCode) {
         this.empCode = empCode;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @param cell
+     */
     public void setCell(String cell) {
         this.cell = cell;
     }
@@ -68,6 +105,10 @@ public class Employee {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public final Object[] printTableData() {
         // DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         //  model.getDataVector().removeAllElements();

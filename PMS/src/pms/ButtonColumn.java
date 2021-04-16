@@ -91,6 +91,10 @@ public class ButtonColumn extends AbstractCellEditor
         editButton.setBorder(focusBorder);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMnemonic() {
         return mnemonic;
     }
