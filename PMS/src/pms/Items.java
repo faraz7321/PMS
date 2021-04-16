@@ -1,5 +1,7 @@
 package pms;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Faraz Ahmad
@@ -11,6 +13,24 @@ public class Items {
     private int price;
     private int quantity;
     private String isConsumable;
+    private String barcode;
+    ArrayList<Admin> admin = new ArrayList<>();
+
+    public Items(ArrayList<Admin> admin) {
+
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public Items() {
+
+    }
 
     public String getItemName() {
         return itemName;
@@ -50,21 +70,6 @@ public class Items {
 
     public void setIsConsumable(String isConsumable) {
         this.isConsumable = isConsumable;
-    }
-
-    public boolean addItem() {
-        boolean flag = false;
-        return flag;
-    }
-
-    public boolean deleteItem() {
-        boolean flag = false;
-        return flag;
-    }
-
-    public boolean updateItem() {
-        boolean flag = false;
-        return flag;
     }
 
 }

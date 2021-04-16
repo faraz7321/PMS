@@ -19,6 +19,8 @@ public class ALogin extends javax.swing.JFrame {
      * Creates new form ALogin
      */
     public ALogin() {
+        this.pack();
+        this.setLocationRelativeTo(null);
         initComponents();
     }
 

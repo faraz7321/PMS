@@ -9,6 +9,8 @@ import java.util.Date;
  */
 public class Employee {
 
+    static Employee employee;
+
     private String name;
     private String empCode;
     private String email;
@@ -19,6 +21,10 @@ public class Employee {
     }
 
     public String getEmpCode() {
+        return empCode;
+    }
+
+    public String getEmpCode(String emp) {
         return empCode;
     }
 
@@ -47,6 +53,7 @@ public class Employee {
     }
 
     static boolean requestItem(String item, int quantity) {
+        Admin obj = Admin.getInstance();
         Requests req = new Requests();
         req.setItemName(item);
         req.setQuantity(quantity);
@@ -54,7 +61,7 @@ public class Employee {
         Date date = new Date(System.currentTimeMillis());
         String strDate = formatter.format(date);
         req.setDate(strDate);
-        Admin.request.add(req);
+        obj.request.add(req);
         return true;
     }
 

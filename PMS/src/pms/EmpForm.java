@@ -14,6 +14,8 @@ public class EmpForm extends javax.swing.JFrame {
      * Creates new form EmpForm
      */
     public EmpForm() {
+        this.pack();
+        this.setLocationRelativeTo(null);
         initComponents();
     }
 
@@ -47,7 +49,7 @@ public class EmpForm extends javax.swing.JFrame {
 
         jLabel4.setText("Select Category");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laptop", "Stationary", "Tools", "Electronics", "Software", "Cleaning" }));
 
         jLabel5.setText("Select Item");
 

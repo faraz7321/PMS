@@ -1,0 +1,2 @@
+laptop,electronics,80000,8,false
+test123,Cleaning,6,3,true

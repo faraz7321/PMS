@@ -1,6 +1,6 @@
 package pms;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -10,11 +10,11 @@ public class PMS {
 
     /**
      * @param args the command line arguments
+     *
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // TODO code application logic here
-        //Admin.loadData();
-        //Admin.loadItems();
+        ArrayList<Admin> admin = new ArrayList<>();
         Login login = new Login();
         login.setVisible(true);
     }

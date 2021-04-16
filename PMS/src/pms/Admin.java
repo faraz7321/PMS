@@ -1,11 +1,14 @@
 package pms;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,14 +16,31 @@ import java.util.Scanner;
  */
 public class Admin {
 
-    static ArrayList<Items> item = new ArrayList<>();
-    static ArrayList<Employee> employees = new ArrayList<>();
-    static ArrayList<Requests> request = new ArrayList<>();
+    static Admin admin;
+    public ArrayList<Items> item;
+    public ArrayList<Employee> employees;
+    public ArrayList<Requests> request;
 
-    static void loadData() {
+    private Admin() {
+        item = new ArrayList<>();
+        employees = new ArrayList<>();
+        request = new ArrayList<>();
+    }
+
+    static Admin getInstance() {
+        if (admin == null) {
+            admin = new Admin();
+
+        }
+        return admin;
+    }
+    //Admin obj = Admin.getInstance();
+
+    public void loadData() {
         employees.removeAll(employees);
+
         try {
-            Scanner br = new Scanner(new File("employeeData.txt"));
+            Scanner br = new Scanner(new File("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\employeeData.txt"));
             while (br.hasNextLine()) {
                 String line = br.nextLine();
                 String[] arr = line.split(",");
@@ -32,16 +52,16 @@ public class Admin {
                 employees.add(e);
                 System.out.println(line);
             }
+
         } catch (FileNotFoundException ex) {
             System.out.println("An error occurred.");
         }
-
     }
 
-    static void loadItems() {
+    public void loadItems() {
         try {
             item.removeAll(item);
-            Scanner scanner = new Scanner(new File("itemsData.txt"));
+            Scanner scanner = new Scanner(new File("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\itemsData.txt"));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] arr = line.split(",");
@@ -60,10 +80,10 @@ public class Admin {
         }
     }
 
-    static void loadRequests() {
+    public void loadRequests() {
         try {
             request.removeAll(request);
-            Scanner scanner = new Scanner(new File("requests.txt"));
+            Scanner scanner = new Scanner(new File("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\requests.txt"));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] arr = line.split(",");
@@ -81,9 +101,10 @@ public class Admin {
         }
     }
 
-    static void saveData() {
+    public void saveData() {
+
         try {
-            try (FileWriter myWriter = new FileWriter("employeeData.txt")) {
+            try (FileWriter myWriter = new FileWriter("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\employeeData.txt")) {
                 for (int i = 0; i < employees.size(); i++) {
                     Employee e = employees.get(i);
                     myWriter.write(e.getName() + "," + e.getEmail() + "," + e.getCell() + "," + e.getEmpCode() + "\n");
@@ -95,12 +116,38 @@ public class Admin {
         }
     }
 
-    static void saveItems() {
+    public void exitSave() {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Choose a destination to save exported file");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            String filename = chooser.getSelectedFile() + ".csv";
+            try {
+                FileWriter fw = new FileWriter(filename);
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write("Name,Email,Contact,EMP Code\n");
+                for (int i = 0; i < employees.size(); i++) {
+                    bw.write(employees.get(i).getName() + ","
+                            + employees.get(i).getEmail() + ","
+                            + employees.get(i).getCell() + ","
+                            + employees.get(i).getEmpCode() + "," + "\n");
+                }
+                bw.flush();
+                bw.close();
+                fw.close();
+            } catch (IOException ex) {
+            }
+        } else {
+            System.out.println("No Selection ");
+        }
+    }
+
+    public void saveItems() {
         try {
-            try (FileWriter myWriter = new FileWriter("itemsData.txt")) {
+            try (FileWriter myWriter = new FileWriter("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\itemsData.txt")) {
                 for (int i = 0; i < item.size(); i++) {
                     Items it = item.get(i);
-                    myWriter.write(it.getItemName() + "," + it.getCategory() + "," + it.getPrice() + "," + it.getIsConsumable() + "\n");
+                    myWriter.write(it.getItemName() + "," + it.getCategory() + "," + it.getPrice() + "," + it.getQuantity() + "," + it.getIsConsumable() + "\n");
                 }
             }
             System.out.println("Successfully wrote to the file.");
@@ -109,12 +156,12 @@ public class Admin {
         }
     }
 
-    static void saveRequests() {
+    public void saveRequests() {
         try {
-            try (FileWriter myWriter = new FileWriter("requests.txt")) {
+            try (FileWriter myWriter = new FileWriter("C:\\Users\\Faraz Ahmad\\Desktop\\Project\\PMS\\temp\\requests.txt")) {
                 for (int i = 0; i < item.size(); i++) {
                     Requests it = request.get(i);
-                    myWriter.write(it.getEmpcode() + "," + it.getEmpName() + "," + it.getItemName() + "," + it.getQuantity() + it.getDate() + "\n");
+                    myWriter.write(it.getEmpcode() + "," + it.getEmpName() + "," + it.getItemName() + "," + it.getQuantity() + "," + it.getDate() + "\n");
                 }
             }
             System.out.println("Successfully wrote to the file.");
@@ -123,7 +170,7 @@ public class Admin {
         }
     }
 
-    static boolean addEmployee(String name, String email, String cell, String code) {
+    public boolean addEmployee(String name, String email, String cell, String code) {
         Employee e = new Employee();
         e.setName(name);
         e.setEmail(email);
@@ -134,7 +181,7 @@ public class Admin {
         return true;
     }
 
-    static boolean updateEmployee(String name, String email, String cell, String code) {
+    public boolean updateEmployee(String name, String email, String cell, String code) {
         boolean flag = false;
         for (int i = 0; i < employees.size(); i++) {
             if (employees.get(i).getEmpCode().equals(code)) {
@@ -152,21 +199,28 @@ public class Admin {
         return flag;
     }
 
-    static boolean deleteEmployee(String code) {
+    public boolean deleteEmployee(String code) {
         boolean flag = false;
         for (int i = 0; i < employees.size(); i++) {
             if (employees.get(i).getEmpCode().equals(code)) {
-                //String x=JOptionPane.showInputDialog("Are you sure you want to delete this employee");
-                employees.remove(i);
-                flag = true;
-                saveData();
+                int x = JOptionPane.showConfirmDialog(null, "Employee Found!\n" + employees.get(i).getName() + "\nAre you sure you want to delete this employee?");
+                if (x == 0) {
+                    employees.remove(i);
+                    saveData();
+                    JOptionPane.showMessageDialog(null, "Employee Deleted Successfully!");
+                    flag = true;
+                } else if (x == 1) {
+                    flag = true;
+                } else {
+                    flag = true;
+                }
                 break;
             }
         }
         return flag;
     }
 
-    static boolean searchEmployee(String code) {
+    public boolean searchEmployee(String code) {
         boolean flag = false;
         for (int i = 0; i < employees.size(); i++) {
             if (employees.get(i).getEmpCode().equals(code)) {
@@ -179,23 +233,12 @@ public class Admin {
         return flag;
     }
 
-    static boolean addItem(String name, String category, int price, int quantity, String consm) {
-
-        Items it = new Items();
-        it.setItemName(name);
-        it.setCategory(category);
-        it.setPrice(price);
-        it.setQuantity(quantity);
-        it.setIsConsumable(consm);
-        item.add(it);
-        return true;
-    }
-
-    static boolean deleteItem(String name) {
+    public boolean searchItem(String name) {
         boolean flag = false;
-        for (int i = 0; i < employees.size(); i++) {
+        for (int i = 0; i < item.size(); i++) {
             if (item.get(i).getItemName().equals(name)) {
-                item.remove(i);
+                //String x=JOptionPane.showInputDialog("Are you sure you want to delete this employee");
+                //employees.remove(i);
                 flag = true;
                 break;
             }
@@ -203,7 +246,68 @@ public class Admin {
         return flag;
     }
 
-    private Admin() {
+    public boolean addItem(String name, String category, int price, int quantity, String consm) {
+
+        Items it = new Items();
+        it.setItemName(name);
+        it.setCategory(category);
+        it.setPrice(price);
+        it.setQuantity(quantity);
+        it.setIsConsumable(consm);
+        saveItems();
+        item.add(it);
+        return true;
     }
 
+    public boolean updateItem(String search, String name, String category, int price, int quantity, String consm) {
+        boolean flag = false;
+        for (int i = 0; i < item.size(); i++) {
+            if (item.get(i).getItemName().equals(search)) {
+                Items e = new Items();
+                item.get(i).setItemName(name);
+                item.get(i).setCategory(category);
+                item.get(i).setPrice(price);
+                item.get(i).setQuantity(quantity);
+                item.get(i).setIsConsumable(consm);
+                saveItems();
+                //employees.add(e);
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    public boolean deleteItem(String code) {
+        boolean flag = false;
+        for (int i = 0; i < item.size(); i++) {
+            if (item.get(i).getBarcode().equals(code)) {
+                int x = JOptionPane.showConfirmDialog(null, "Item Found!\n" + item.get(i).getBarcode() + "\nAre you sure you want to delete this item?");
+                if (x == 0) {
+                    item.remove(i);
+                    saveData();
+                    JOptionPane.showMessageDialog(null, "Item Deleted Successfully!");
+                    flag = true;
+                } else if (x == 1) {
+                    flag = true;
+                } else {
+                    flag = true;
+                }
+                break;
+            }
+        }
+        return flag;
+    }
+
+    public boolean Login(String email, String empCode) {
+        boolean flag = false;
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getEmail().equals(email) && employees.get(i).getEmpCode().equals(empCode)) {
+                flag = true;
+                break;
+            }
+        }
+
+        return flag;
+    }
 }
