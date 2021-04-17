@@ -344,4 +344,29 @@ public class Admin {
         return q;
     }
 
+    public void printReceipt(String empcode, String email, String itemname, String quant, String date) {
+        Random rand = new Random();
+        String receiptID = "";
+        for (int j = 0; j < 4; j++) {
+            Random r = new Random();
+            int nn = rand.nextInt(10);
+            receiptID += String.valueOf(nn);
+        }
+        try {
+            try (FileWriter myWriter = new FileWriter(receiptID + ".txt")) {
+                myWriter.write("REQUEST APPROVED!\n\n"
+                        + "RECEIPT ID: " + receiptID
+                        + "\n\nEMP CODE: " + empcode
+                        + "\nEMAIL: " + email
+                        + "\nITEM: " + itemname
+                        + "\nQuantity: " + quant
+                        + "\nDATE: " + date
+                        + "\n\nSignature: ");
+            }
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+        }
+    }
+
 }

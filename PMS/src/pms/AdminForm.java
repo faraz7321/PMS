@@ -1041,6 +1041,7 @@ public class AdminForm extends javax.swing.JFrame {
             // JOptionPane.showConfirmDialog(null, "Press OK to Approve Request and Cancel to delete");
 
             if (n == 0) {
+
                 JOptionPane.showMessageDialog(this, "REQUEST APPROVED!\n\n"
                         + "EMP CODE: " + empcode
                         + "\nEMAIL: " + email
@@ -1048,6 +1049,7 @@ public class AdminForm extends javax.swing.JFrame {
                         + "\nQuantity: " + quan
                         + "\nDATE: " + date
                         + "\n\nSignature: ");
+                Admin.getInstance().printReceipt(empcode, email, itemname, quan, date);
                 Admin.getInstance().request.get(i).setStatus("approved");
                 Admin.getInstance().saveRequests();
                 this.setVisible(false);
